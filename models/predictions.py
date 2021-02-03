@@ -117,13 +117,13 @@ class Predictions:
         
         y_pred = self.predictions(split=split)
         res    = None
-
+        
         if isinstance(y_pred, dict):
             res = {key: self.__y[split][key].reshape(-1,) - values.reshape(-1,) for key, values in y_pred.items()}
         else:
             res = self.__y[split] - y_pred
             
-        if isinstance(res, np.ndarray):
+        if isinstance(res, np.ndarray) or isinstance(res, dict):
             return res
         else:
             return res.values
